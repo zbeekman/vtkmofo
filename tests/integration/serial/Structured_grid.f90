@@ -16,7 +16,6 @@ PROGRAM Structured_grid_test
     INTEGER(i4k)                :: i, j, k, cnt = 1
     INTEGER(i4k),     PARAMETER :: n_x = 19, n_y = 1, n_z = 4, unit = 20
     CHARACTER(LEN=*), PARAMETER :: filename = 'structured_grid'
-    CHARACTER(LEN=*), PARAMETER :: title    = 'Testing of cylindrical geometry'
     INTEGER(i4k), DIMENSION(3)  :: dims
     REAL(r8k), DIMENSION(n_x), PARAMETER :: x_vals = &
       & [ 0.00E+00_r8k, 8.03E-04_r8k, 1.51E-03_r8k, 2.12E-03_r8k, 2.64E-03_r8k, &

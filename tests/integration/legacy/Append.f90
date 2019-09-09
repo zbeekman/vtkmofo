@@ -93,8 +93,6 @@ PROGRAM Append_test
     TYPE(voxel),        DIMENSION(n_cells-1) :: voxel_cells     !! Voxel cell type
     TYPE(hexahedron)                         :: hexahedron_cell !! Hexahedron cell type
     TYPE(vtkcell_list), DIMENSION(n_cells)   :: cell_list       !! Full list of all cells
-    CHARACTER(LEN=15), DIMENSION(*), PARAMETER :: point_dataname = &
-      & [ 'Temperature(K) ','Stress (Pa)    ' ]
 
     CALL voxel_cells(1)%setup ( [  0,  1,  4,  5,  8,  9, 12, 13 ] )
     CALL voxel_cells(2)%setup ( [  1,  2,  5,  6,  9, 10, 13, 14 ] )

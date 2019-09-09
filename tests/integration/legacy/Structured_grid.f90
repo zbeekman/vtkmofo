@@ -72,7 +72,7 @@ PROGRAM Cylinder_test
         CALL vals_to_write(i)%attribute%init (dataname(i), numcomp=1, real1d=vals(:,i))
     END DO
 
-    CALL vtk_legacy_write (cylinder, unit=unit, pointdatasets=vals_to_write)
+    CALL vtk_legacy_write (cylinder, unit=unit, pointdatasets=vals_to_write, filename=filename, title=title)
 
     WRITE(*,*) 'Finished'
 

@@ -66,8 +66,8 @@ if ("${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel")
   endif()
 elseif("${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU")
   set(gnu_compiler true)
-  # Fortran 2008 standard, free format (due to automatic build to .f file for testing)
-  set(CMAKE_Fortran_FLAGS "${prefix}std=f2008 ${prefix}fcheck=all ${prefix}Wall ${prefix}Wno-unused-dummy-argument ${prefix}ffree-form")
+  # Fortran 2018 standard, free format (due to automatic build to .f file for testing)
+  set(CMAKE_Fortran_FLAGS "${prefix}std=f2018 ${prefix}pedantic ${prefix}fbacktrace ${prefix}Wall ${prefix}Wextra ${prefix}Wno-unused-dummy-argument ${prefix}Wno-maybe-uninitialized")
 else()
   message(WARNING
     "\n"

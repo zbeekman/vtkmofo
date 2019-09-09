@@ -86,7 +86,7 @@ PROGRAM xml_test
     CALL foo3%setup('xml_FOO3')
     CALL foo3%add([ 4_i4k ])
     CALL foo3%add([ 8_i8k, 8_i8k ])
-    CALL foo3%add([ 4.0_r8k ])
+    CALL foo3%add([ 4.0_r4k ])
     CALL foo3%add([ 8.0_r8k, 8.0_r8k ])
     CALL foo3%add([.true., .false.])
 

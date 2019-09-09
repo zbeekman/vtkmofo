@@ -141,8 +141,7 @@ SUBMODULE (vtk_io) vtk_io_implementation
         END PROCEDURE vtk_legacy_full_write
 
         MODULE PROCEDURE vtk_legacy_append
-        USE Misc,     ONLY : to_uppercase
-        USE vtk_vars, ONLY : default_fn, default_title, version, file_extension
+        USE Misc, ONLY : to_uppercase
         IMPLICIT NONE
         !! author: Ian Porter
         !! date: 12/1/2017
@@ -214,7 +213,7 @@ SUBMODULE (vtk_io) vtk_io_implementation
 
         MODULE PROCEDURE vtk_legacy_read
         USE Misc,     ONLY : def_len
-        USE vtk_vars, ONLY : default_fn, default_title, vtkfilename, vtktitle, version
+        USE vtk_vars, ONLY : vtkfilename, vtktitle, version
         USE XML,      ONLY : convert_string_to_format, ascii, binary, file_format, file_format_text
         IMPLICIT NONE
         !! author: Ian Porter

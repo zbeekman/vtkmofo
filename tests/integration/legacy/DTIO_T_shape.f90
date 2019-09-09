@@ -35,12 +35,9 @@ MODULE DTIO_vtkmofo
 
         INTEGER(i4k), PARAMETER     :: n_params_to_write = 1
         TYPE (attributes), DIMENSION(n_params_to_write) :: point_vals_to_write, cell_vals_to_write
-        INTEGER(i4k)                :: i
         INTEGER(i4k),     PARAMETER :: n_points = 24, n_cells = 5
         CHARACTER(LEN=*), PARAMETER :: title    = 'Testing of T-shape unstructured grid geometry'
-        REAL(r8k), DIMENSION(n_cells, 1:n_params_to_write) :: cell_vals
-        REAL(r8k), DIMENSION(n_points,1:n_params_to_write) :: point_vals
-        REAL(r8k), DIMENSION(3,n_points), PARAMETER        :: points = RESHAPE ( &
+        REAL(r8k), DIMENSION(3,n_points), PARAMETER :: points = RESHAPE ( &
           & [ 0.5_r8k, 0.0_r8k, 0.0_r8k, &
           &   1.0_r8k, 0.0_r8k, 0.0_r8k, &
           &   0.5_r8k, 0.5_r8k, 0.0_r8k, &
@@ -65,11 +62,10 @@ MODULE DTIO_vtkmofo
           &   0.5_r8k, 0.5_r8k, 1.5_r8k, &
           &   1.0_r8k, 0.5_r8k, 1.5_r8k, &
           &   1.5_r8k, 0.5_r8k, 1.5_r8k ], [3,n_points] )
-        REAL(r8k), PARAMETER :: temp_default = 100.0_r8k, temp_increment = 10.0_r8k
-        REAL(r8k), DIMENSION(n_points), PARAMETER :: temp_norm = &
-          & [ 1.0_r8k, 1.0_r8k, 1.0_r8k, 1.0_r8k, 2.0_r8k, 2.0_r8k, 2.0_r8k, 2.0_r8k, 1.0_r8k, &
-          &   3.0_r8k, 3.0_r8k, 1.0_r8k, 1.0_r8k, 4.0_r8k, 4.0_r8k, 1.0_r8k, 1.0_r8k, 2.0_r8k, &
-          &   2.0_r8k, 1.0_r8k, 1.0_r8k, 3.0_r8k, 3.0_r8k, 1.0_r8k ]
+        REAL(r8k), DIMENSION(n_points), PARAMETER :: temp = &
+          & [ 100.0_r8k, 100.0_r8k, 100.0_r8k, 100.0_r8k, 200.0_r8k, 200.0_r8k, 200.0_r8k, 200.0_r8k, 100.0_r8k, &
+          &   300.0_r8k, 300.0_r8k, 100.0_r8k, 100.0_r8k, 400.0_r8k, 400.0_r8k, 100.0_r8k, 100.0_r8k, 200.0_r8k, &
+          &   200.0_r8k, 100.0_r8k, 100.0_r8k, 300.0_r8k, 300.0_r8k, 100.0_r8k ]
         INTEGER(i4k), DIMENSION(n_cells), PARAMETER :: cellID = &
           & [ 11, 11, 11, 11, 12 ]
         TYPE(voxel),        DIMENSION(n_cells-1) :: voxel_cells     !! Voxel cell type
@@ -99,18 +95,16 @@ MODULE DTIO_vtkmofo
         ALLOCATE(t_shape, source=me)
         CALL t_shape%init (points=points, cell_list=cell_list)
 
-        DO i = 1, n_params_to_write
-            ! Cell values
-            IF (.NOT. ALLOCATED(cell_vals_to_write(i)%attribute))THEN
-                ALLOCATE(scalar::cell_vals_to_write(i)%attribute)
-            END IF
-            CALL cell_vals_to_write(i)%attribute%init (TRIM(cell_dataname(i)), numcomp=1, real1d=cell_vals(:,i))
-            ! Point values
-            IF (.NOT. ALLOCATED(point_vals_to_write(i)%attribute))THEN
-                ALLOCATE(scalar::point_vals_to_write(i)%attribute)
-            END IF
-            CALL point_vals_to_write(i)%attribute%init (TRIM(point_dataname(i)), numcomp=1, real1d=point_vals(:,i))
-        END DO
+        ! Cell values
+        IF (.NOT. ALLOCATED(cell_vals_to_write(1)%attribute))THEN
+            ALLOCATE(scalar::cell_vals_to_write(1)%attribute)
+        END IF
+        CALL cell_vals_to_write(1)%attribute%init (TRIM(cell_dataname(1)), numcomp=1, int1d=cellID)
+        ! Point values
+        IF (.NOT. ALLOCATED(point_vals_to_write(1)%attribute))THEN
+            ALLOCATE(scalar::point_vals_to_write(1)%attribute)
+        END IF
+        CALL point_vals_to_write(1)%attribute%init (TRIM(point_dataname(1)), numcomp=1, real1d=temp)
 
         SELECT CASE (iotype)
         CASE DEFAULT
